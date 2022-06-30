@@ -1,6 +1,6 @@
 //scripted pipeline
 
-node('node9'){
+node(''){
   def MHD = tool name:"maven 3.8.4"
   stage('Initiation'){
     sh "echo Start of Fintech Pipeline App"
