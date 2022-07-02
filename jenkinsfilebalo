@@ -22,21 +22,21 @@ node('node1'){
     sh "echo Backup Artifacts"
     sh "${MHD}/bin/mvn deploy" */
   }
-  stage ("6. Deploy to staging"){
+  stage("6. Deploy to staging"){
       sh "echo deploying to application server"
       deploy adapters: [tomcat9(credentialsId: 'tomcat', path: '', url: 'http://18.212.61.185:8080/')], contextPath: 'pipeline.war', war: 'target/*.war'
   }
-  stage ("7. Approval"){
+  stage("7. Approval"){
       sh "echo Approval required"
       timeout(time:5, unit:'DAYS'){
           input message: "Approval for production"
       }
   }
-  stage ("8. Deploy to Production server"){
+  stage("8. Deploy to Production server"){
       sh "echo deploying to production server"
       deploy adapters: [tomcat9(credentialsId: 'tomcat', path: '', url: 'http://18.212.61.185:8080/')], contextPath: 'pipeline.war', war: 'target/*.war'
   }
-  stage ("9. Email notifications"){
+  stage("9. Email notifications"){
       sh "echo sending email notification"
       emailext body: 'Build is complete', subject: 'Build complete', to: 'info@acada.com'
   }
