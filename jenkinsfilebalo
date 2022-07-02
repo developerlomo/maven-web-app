@@ -24,7 +24,7 @@ node('node1'){
   }
   stage ("6. Deploy to staging"){
       sh "echo deploying to application server"
-      "deploy adapters: [tomcat9(credentialsId: 'tomcat', path: '', url: 'http://18.212.61.185:8080/')], contextPath: 'pipeline.war', war: 'target/*.war'"
+      deploy adapters: [tomcat9(credentialsId: 'tomcat', path: '', url: 'http://18.212.61.185:8080/')], contextPath: 'pipeline.war', war: 'target/*.war'
   }
   stage ("7. Approval"){
       sh "echo Approval required"
@@ -34,7 +34,7 @@ node('node1'){
   }
   stage ("8. Deploy to Production server"){
       sh "echo deploying to production server"
-      "deploy adapters: [tomcat9(credentialsId: 'tomcat', path: '', url: 'http://18.212.61.185:8080/')], contextPath: 'pipeline.war', war: 'target/*.war'"
+      deploy adapters: [tomcat9(credentialsId: 'tomcat', path: '', url: 'http://18.212.61.185:8080/')], contextPath: 'pipeline.war', war: 'target/*.war'
   }
   stage ("9. Email notifications"){
       sh "echo sending email notification"
